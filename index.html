@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Asignación de Parejas</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    h1 { font-size: 24px; }
+    form { margin-bottom: 20px; }
+    input[type="text"] { padding: 5px; font-size: 14px; }
+    button { padding: 6px 12px; font-size: 14px; cursor: pointer; }
+    #resultado { margin-top: 15px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Consulta tu pareja asignada</h1>
+  <p>Personas: A, B, C, D, E</p>
+
+  <form id="formulario">
+    <label for="nombre">Introduce tu nombre (A, B, C, D o E): </label>
+    <input type="text" id="nombre" required>
+    <button type="submit">Consultar</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    // Lista de personas
+    const personas = ["A", "B", "C", "D", "E"];
+
+    // Genera una asignación aleatoria sin que nadie se asigne a sí mismo (derangement)
+    function generarAsignacion() {
+      let asignados;
+      let valido = false;
+
+      while (!valido) {
+        asignados = [...personas];
+        // Mezclar array (Fisher-Yates)
+        for (let i = asignados.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [asignados[i], asignados[j]] = [asignados[j], asignados[i]];
+        }
+
+        // Comprobar que nadie se asigna a sí mismo
+        valido = true;
+        for (let i = 0; i < personas.length; i++) {
+          if (personas[i] === asignados[i]) {
+            valido = false;
+            break;
+          }
+        }
+      }
+
+      // Crear un mapa persona -> pareja
+      const mapa = {};
+      for (let i = 0; i < personas.length; i++) {
+        mapa[personas[i]] = asignados[i];
+      }
+      return mapa;
+    }
+
+    // Generamos la asignación una sola vez por carga de página
+    const asignacion = generarAsignacion();
+    console.log("Asignación generada:", asignacion); // solo para depuración
+
+    const formulario = document.getElementById("formulario");
+    const resultado = document.getElementById("resultado");
+
+    formulario.addEventListener("submit", function(event) {
+      event.preventDefault();
+      const nombreInput = document.getElementById("nombre").value.trim().toUpperCase();
+
+      if (!personas.includes(nombreInput)) {
+        resultado.textContent = "Nombre no válido. Debe ser A, B, C, D o E.";
+        return;
+      }
+
+      const pareja = asignacion[nombreInput];
+      resultado.textContent = `A ${nombreInput} le ha sido asignado: ${pareja}`;
+    });
+  </script>
+</body>
+</html>
