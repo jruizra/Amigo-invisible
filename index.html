@@ -14,7 +14,8 @@
 </head>
 <body>
   <h1>Consulta a quién te ha tocado en el Amigo Invisible de Navidades 2025</h1>
-  <p>Las personas participantes son: A, B, C, D, E</p>
+  <p>Las personas participantes son:</p>
+  <p>Abuelo, Cristina, Gavi, Raquel, Julio, Ana C., Carla, Julio Jr, Carlos, Ana M., Martín, Javi, Clau, Aitana, Diego<p>
   <p>No hagas trampas, consulta solo quién te ha tocado a tí</p>
   
   <form id="formulario">
@@ -28,11 +29,21 @@
   <script>
     // ASIGNACIÓN FIJA (MODIFICA ESTO COMO QUIERAS)
     const asignacion = {
-      "A": "C",
-      "B": "E",
-      "C": "A",
-      "D": "B",
-      "E": "D"
+      "Abuelo": "Gavi",
+      "Cristina": "Ana C.",
+      "Gavi": "Aitana",
+      "Raquel": "Carlos",
+      "Julio": "Cristina",
+      "Ana C.": "Julio Jr",
+      "Carla": "Diego",
+      "Julio Jr": "Carla",
+      "Carlos": "Javi",
+      "Ana M.": "Raquel",
+      "Martín": "Clau",
+      "Javi": "Abuelo",
+      "Clau": "Ana M.",
+      "Aitana": "Martín",
+      "Diego": "Julio"
     };
 
     const personas = Object.keys(asignacion);
@@ -54,4 +65,5 @@
   </script>
 </body>
 </html>
+
 
