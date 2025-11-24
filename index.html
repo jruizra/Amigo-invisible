@@ -53,7 +53,7 @@
 
     formulario.addEventListener("submit", function(event) {
       event.preventDefault();
-      const nombre = document.getElementById("nombre").value.trim().toUpperCase();
+      const nombre = document.getElementById("nombre").value.trim();
 
       if (!personas.includes(nombre)) {
         resultado.textContent = "Nombre no válido. Usa un nombre de la lista.";
@@ -65,6 +65,7 @@
   </script>
 </body>
 </html>
+
 
 
 
